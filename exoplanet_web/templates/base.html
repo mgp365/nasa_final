@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Exoplanetas{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Nexa body font (fallbacks) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;900&display=swap" rel="stylesheet">
+    {% block head %}{% endblock %}
+    <script>
+      // Basic TTS controls available to all pages
+      let speechUtterance = null;
+      let speechActive = false;
+      function toggleTTS() {
+        const selection = document.getSelection().toString().trim();
+        const textToRead = selection || document.body.innerText;
+        if (!speechActive) {
+          if (speechSynthesis.speaking) { speechSynthesis.cancel(); }
+          speechUtterance = new SpeechSynthesisUtterance(textToRead);
+          speechUtterance.lang = 'es-ES';
+          speechUtterance.onend = () => { speechActive = false; updateTTSState(); };
+          speechSynthesis.speak(speechUtterance);
+          speechActive = true;
+        } else {
+          speechSynthesis.cancel();
+          speechActive = false;
+        }
+        updateTTSState();
+      }
+      function updateTTSState(){
+        const btn = document.getElementById('btn-tts');
+        if (!btn) return;
+        btn.setAttribute('aria-pressed', speechActive ? 'true' : 'false');
+        btn.title = speechActive ? 'Detener lectura' : 'Escuchar lectura';
+      }
+      function goBack(){
+        if (document.referrer) { window.history.back(); } else { window.location.href = '{{ url_for('portada') }}'; }
+      }
+      function toggleSideMenu(){
+        document.body.classList.toggle('menu-open');
+      }
+      function toggleAIChat(){
+        document.body.classList.toggle('chat-open');
+      }
+    </script>
+</head>
+<body>
+    <header class="topbar">
+        <div class="brand" onclick="window.location='{{ url_for('portada') }}'">Exoplanetas</div>
+        <form class="quick-search" action="{{ url_for('buscar') }}" method="get">
+            <input type="text" name="q" placeholder="Buscar exoplaneta..." aria-label="Buscar exoplaneta">
+            <button type="submit">Buscar</button>
+        </form>
+        <nav class="top-actions">
+            <a href="#" onclick="window.location='{{ url_for('portada') }}'">Inicio</a>
+            <a href="#" onclick="window.location='{{ url_for('menu_principal') }}'">Menú</a>
+            <a href="#" onclick="window.location='{{ url_for('contenidos') }}'">Contenidos</a>
+            <a href="#" onclick="window.location='{{ url_for('herramienta') }}'">Herramienta</a>
+            <a href="#">Contacto</a>
+            <a href="#">Ingresar</a>
+            <a href="#">Registro</a>
+        </nav>
+    </header>
+
+    <!-- Slide-out menu content for small screens -->
+    <aside class="side-menu" aria-hidden="true">
+        <button class="close" onclick="toggleSideMenu()" aria-label="Cerrar menú">×</button>
+        <ul>
+            <li><a href="{{ url_for('menu_principal') }}">Menú principal</a></li>
+            <li><a href="{{ url_for('contenidos') }}">Contenidos</a></li>
+            <li><a href="{{ url_for('buscar') }}">Herramienta de búsqueda</a></li>
+            <li><a href="{{ url_for('identificador') }}">Identificador de exoplanetas</a></li>
+        </ul>
+    </aside>
+
+    <!-- AI Chat panel -->
+    <section class="ai-chat" aria-hidden="true">
+        <header>
+            <h2>Asistente</h2>
+            <button onclick="toggleAIChat()" aria-label="Cerrar chat">×</button>
+        </header>
+        <div class="chat-quick">
+            <button>¿Cómo funciona la página?</button>
+            <button>¿Cómo usar la herramienta de búsqueda?</button>
+            <button>Problemas para escuchar la lectura</button>
+            <button>Más información</button>
+            <button>Ayuda</button>
+        </div>
+        <div class="chat-window">
+            <div class="messages" id="chat-messages"></div>
+            <form class="composer" onsubmit="event.preventDefault();">
+                <input type="text" placeholder="Escribe tu pregunta...">
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+    </section>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Floating controls -->
+    <button class="fab fab-back" onclick="goBack()" title="Regresar" aria-label="Regresar">←</button>
+    <button class="fab fab-menu" onclick="toggleSideMenu()" title="Abrir menú" aria-label="Abrir menú">≡</button>
+    <button id="btn-tts" class="fab fab-tts" onclick="toggleTTS()" title="Escuchar lectura" aria-label="Escuchar lectura">🔊</button>
+    <button class="fab fab-ai" onclick="toggleAIChat()" title="Asistente" aria-label="Asistente">👨‍🚀</button>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>
+

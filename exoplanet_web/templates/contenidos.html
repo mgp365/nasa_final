@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %}Contenidos{% endblock %}
+{% block head %}
+<style>
+  .planets{ display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:1rem; padding:2rem }
+  .planet{
+    position:relative; height:180px; border-radius:16px; overflow:hidden; cursor:pointer;
+    background: radial-gradient(circle at 30% 30%, #274a9e, #0a153a 60%);
+    border:1px solid rgba(120,170,255,.2);
+  }
+  .planet h3{ position:absolute; left:12px; bottom:12px; margin:0 }
+  .popover{
+    position:absolute; left:12px; top:12px; right:12px; padding:.75rem; border-radius:12px;
+    background:rgba(8,16,44,.92); border:1px solid rgba(120,170,255,.25); color:var(--ink);
+    box-shadow:0 12px 32px rgba(0,0,0,.35); display:none;
+  }
+  .planet:hover .popover{ display:block }
+  .links{ display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.5rem }
+  .links a{ color:#cfe0ff }
+</style>
+{% endblock %}
+{% block content %}
+<section class="page">
+  <h1>Contenidos</h1>
+  <p class="center">Coloca el cursor sobre un planeta para explorar los temas.</p>
+  <div class="planets">
+    <a class="planet" href="{{ url_for('tema', slug='que-son-los-exoplanetas') }}">
+      <h3>¿Qué son los exoplanetas?</h3>
+      <div class="popover">
+        Breve introducción a los exoplanetas.
+        <div class="links">
+          <a href="{{ url_for('tema', slug='que-son-los-exoplanetas') }}">Abrir tema</a>
+        </div>
+      </div>
+    </a>
+    <a class="planet" href="{{ url_for('tema', slug='caracteristicas') }}">
+      <h3>Características</h3>
+      <div class="popover">
+        Tipos, tamaños, órbitas y métodos de detección.
+        <div class="links">
+          <a href="{{ url_for('tema', slug='caracteristicas') }}">Abrir tema</a>
+        </div>
+      </div>
+    </a>
+    <a class="planet" href="{{ url_for('tema', slug='mas-conocidos') }}">
+      <h3>Más conocidos</h3>
+      <div class="popover">
+        Una selección de exoplanetas emblemáticos.
+        <div class="links">
+          <a href="{{ url_for('tema', slug='mas-conocidos') }}">Abrir tema</a>
+        </div>
+      </div>
+    </a>
+    <a class="planet" href="{{ url_for('buscar') }}">
+      <h3>Herramienta de búsqueda</h3>
+      <div class="popover">
+        Base de datos consultable y filtros.
+        <div class="links">
+          <a href="{{ url_for('buscar') }}">Abrir herramienta</a>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+{% endblock %}
+

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Identificador de exoplanetas{% endblock %}
+{% block content %}
+<section class="page pad">
+  <h1>Identificador de exoplanetas</h1>
+  <form method="POST" class="form-grid" action="{{ url_for('identificador') }}">
+    <label>Periodo (días)
+      <input type="number" step="any" name="period" required>
+    </label>
+    <label>Duración (días)
+      <input type="number" step="any" name="duration" required>
+    </label>
+    <label>Profundidad
+      <input type="number" step="any" name="depth" required>
+    </label>
+    <label>Radio planeta (R⊕)
+      <input type="number" step="any" name="planet_radius" required>
+    </label>
+    <label>Temperatura estrella (K)
+      <input type="number" step="any" name="stellar_teff" required>
+    </label>
+    <label>Radio estrella (R☉)
+      <input type="number" step="any" name="stellar_radius" required>
+    </label>
+    <label>Masa estrella (M☉)
+      <input type="number" step="any" name="stellar_mass" required>
+    </label>
+    <label>Insolación
+      <input type="number" step="any" name="insolation" required>
+    </label>
+    <div style="grid-column:1/-1">
+      <button class="btn primary" type="submit">Predecir</button>
+      <a class="btn ghost" href="{{ url_for('herramienta') }}">Volver</a>
+    </div>
+  </form>
+
+  {% if prediction %}
+    <div class="result">Resultado: {{ prediction }}</div>
+  {% endif %}
+</section>
+{% endblock %}

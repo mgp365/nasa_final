@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Herramienta de búsqueda{% endblock %}
+{% block content %}
+<section class="page center pad">
+  <h1>Herramienta de búsqueda para exoplanetas</h1>
+  <div class="hero-cta" style="margin-top:1rem; justify-content:center;">
+    <a class="btn primary" href="{{ url_for('buscar') }}">Buscar exoplanetas</a>
+    <a class="btn ghost" href="{{ url_for('identificador') }}">Identificador de exoplanetas</a>
+  </div>
+</section>
+{% endblock %}
+

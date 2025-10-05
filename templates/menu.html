@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Menú principal{% endblock %}
+{% block content %}
+<section class="page pad">
+  <h1>Menú principal</h1>
+  <div class="cards">
+    <a class="card" href="{{ url_for('contenidos') }}">
+      <h3>Contenidos</h3>
+      <p>Temas sobre exoplanetas, características y los más conocidos.</p>
+    </a>
+    <a class="card" href="{{ url_for('herramienta') }}">
+      <h3>Herramientas</h3>
+      <p>Buscar exoplanetas e identificar candidatos.</p>
+    </a>
+  </div>
+</section>
+{% endblock %}
+

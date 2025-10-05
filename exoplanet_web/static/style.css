@@ -1,0 +1,108 @@
+/* Base theme and typography */
+:root{
+  --bg:#070b1a;
+  --bg-2:#0b1430;
+  --ink:#e6ecff;
+  --muted:#a9b7d9;
+  --primary:#2a6cff;
+  --primary-2:#1d49c7;
+  --accent:#6ad1ff;
+  --heading-font: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, sans-serif;
+  --body-font: 'Nexa', 'Nunito', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+*{ box-sizing:border-box }
+html,body{ height:100% }
+body{
+  margin:0;
+  background: radial-gradient(1200px 800px at 80% -10%, #10204d 0%, transparent 60%),
+              radial-gradient(1400px 900px at -10% 110%, #0b1a46 0%, transparent 60%),
+              var(--bg);
+  color:var(--ink);
+  font-family: var(--body-font);
+  line-height:1.6;
+}
+
+/* Top bar */
+.topbar{
+  position: sticky;
+  top:0; z-index:50;
+  display:flex; align-items:center; gap:1rem;
+  height:64px;
+  padding:0 1rem;
+  background: linear-gradient(180deg, rgba(5,12,35,.9), rgba(5,12,35,.6));
+  backdrop-filter: blur(6px);
+  border-bottom:1px solid rgba(120,170,255,.15);
+}
+.brand{ font-weight:900; cursor:pointer; letter-spacing:.03em; }
+.quick-search{ margin-left:auto; display:flex; gap:.5rem; align-items:center }
+.quick-search input{
+  background:rgba(255,255,255,.06); border:1px solid rgba(120,170,255,.25);
+  color:var(--ink); padding:.5rem .75rem; border-radius:10px; width:220px;
+}
+.quick-search button, .btn{
+  background:var(--primary); color:white; border:none; padding:.55rem .9rem;
+  border-radius:10px; cursor:pointer; font-weight:700;
+}
+.btn.ghost{ background:transparent; border:1px solid rgba(120,170,255,.3); color:var(--ink) }
+.top-actions{ display:flex; gap:.75rem }
+.top-actions a{ color:var(--muted); text-decoration:none; font-weight:700 }
+
+main{ min-height:calc(100vh - 64px); }
+.page{ padding: 1rem 1.25rem; }
+.pad{ padding: 2rem 1.25rem; }
+.center{ text-align:center }
+h1,h2,h3{ font-family: var(--heading-font); margin: .25rem 0 1rem }
+.cards{ display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:1rem }
+.card{ background:rgba(255,255,255,.04); border:1px solid rgba(120,170,255,.2); padding:1rem; border-radius:14px; color:var(--ink); text-decoration:none }
+.card:hover{ border-color:rgba(120,170,255,.35); background:rgba(255,255,255,.06) }
+
+/* Forms */
+.form-grid{ display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:1rem; max-width:900px }
+.form-grid label{ display:grid; gap:.35rem; font-weight:700 }
+.form-grid input{ background:rgba(255,255,255,.06); border:1px solid rgba(120,170,255,.25); color:var(--ink); padding:.55rem .7rem; border-radius:10px }
+.result{ margin-top:1rem; padding:1rem; border-radius:10px; background:rgba(70,200,120,.12); border:1px solid rgba(70,200,120,.35) }
+
+/* Side menu */
+.side-menu{
+  position: fixed; inset: 64px auto 0 0; width: min(320px, 85vw);
+  background: linear-gradient(180deg, #0a1438, #0a183f);
+  border-right:1px solid rgba(120,170,255,.2);
+  transform: translateX(-100%);
+  transition: transform .3s ease;
+  z-index:60;
+  padding:1rem;
+}
+.side-menu .close{ position:absolute; top:.25rem; right:.5rem; background:transparent; color:var(--ink); border:none; font-size:1.5rem; cursor:pointer }
+.side-menu ul{ list-style:none; padding:2rem .5rem 1rem; margin:0; display:grid; gap:.5rem }
+.side-menu a{ color:var(--ink); text-decoration:none; padding:.5rem .75rem; border-radius:8px }
+.side-menu a:hover{ background:rgba(255,255,255,.06) }
+body.menu-open .side-menu{ transform: translateX(0); }
+
+/* AI Chat */
+.ai-chat{
+  position: fixed; right: 1rem; bottom: 5.5rem; width: min(380px, 92vw);
+  background: linear-gradient(180deg, #0a153a, #0d1b49);
+  border:1px solid rgba(120,170,255,.25);
+  border-radius:14px; overflow:hidden; display:none; z-index:70;
+}
+.ai-chat header{ display:flex; align-items:center; justify-content:space-between; padding:.5rem .75rem; border-bottom:1px solid rgba(120,170,255,.2) }
+.ai-chat .chat-quick{ display:flex; flex-wrap:wrap; gap:.5rem; padding:.5rem .75rem }
+.ai-chat .chat-quick button{ background:rgba(255,255,255,.06); color:var(--ink); border:1px solid rgba(120,170,255,.25); padding:.35rem .6rem; border-radius:999px; cursor:pointer }
+.ai-chat .chat-window{ display:grid; grid-template-rows: 240px auto; }
+.ai-chat .messages{ padding:.75rem; overflow:auto }
+.ai-chat .composer{ display:flex; gap:.5rem; padding:.5rem; border-top:1px solid rgba(120,170,255,.2) }
+.ai-chat .composer input{ flex:1; background:rgba(255,255,255,.06); border:1px solid rgba(120,170,255,.25); color:var(--ink); padding:.5rem .6rem; border-radius:10px }
+.ai-chat .composer button{ background:var(--primary); color:#fff; border:none; border-radius:10px; padding:.5rem .9rem }
+body.chat-open .ai-chat{ display:block }
+
+/* Floating action buttons */
+.fab{ position:fixed; width:48px; height:48px; border-radius:999px; display:grid; place-items:center; cursor:pointer; border:1px solid rgba(120,170,255,.25); background:rgba(8,16,44,.85); color:var(--ink); box-shadow:0 6px 22px rgba(0,0,0,.35); z-index:80 }
+.fab-back{ left:1rem; top:72px }
+.fab-menu{ right:1rem; top:72px }
+.fab-tts{ left:1rem; bottom:1rem }
+.fab-ai{ right:1rem; bottom:1rem }
+
+/* Utility */
+.btn.primary{ background:var(--primary) }
+.hero-cta{ display:flex; gap:.75rem }
+

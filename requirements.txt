@@ -2,3 +2,5 @@ Flask
 joblib
 requests
 gunicorn
+pandas
+numpy

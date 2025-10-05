@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% block title %}Exoplanetas - Portada{% endblock %}
 {% block head %}
+
+
 <style>
   /* Inline critical hero styles; rest in style.css */
   .hero {
@@ -14,20 +16,7 @@
     color: #fff;
     overflow: hidden;
   }
-  .hero::after { /* earth image on right as bg element */
-    content: '';
-    position: absolute;
-    right: -10%;
-    bottom: -10%;
-    width: 55vmin;
-    height: 55vmin;
-    background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop');
-    background-size: cover;
-    background-position: center;
-    opacity: .7;
-    filter: saturate(1.1) contrast(1.1);
-    pointer-events: none;
-  }
+  
   .hero-inner {
     padding: 8vmin 8vmin;
     display: flex;
@@ -62,6 +51,8 @@
   .hero-sub {
     max-width: 60ch;
     font-size: 1.125rem;
+    color: #000;
+    font-weight: 700;
     opacity: .9;
   }
   @media (max-width: 920px){
@@ -79,7 +70,7 @@
     <p class="hero-sub">Explora mundos más allá de nuestro sistema solar. Aprende qué son, cuáles son sus características y descubre los exoplanetas más conocidos. Busca bases de datos y usa el identificador para analizar candidatos.</p>
     <div class="hero-cta">
       <a class="btn primary" href="{{ url_for('menu_principal') }}">Entrar</a>
-      <a class="btn ghost" href="{{ url_for('herramienta') }}">Herramientas</a>
+      <a class="btn primary" href="{{ url_for('herramienta') }}">Herramientas</a>
     </div>
   </div>
 </section>

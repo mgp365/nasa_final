@@ -19,3 +19,5 @@ jinja2
 gunicorn
 pandas
 Flask
+sklearn
+
